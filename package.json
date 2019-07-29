@@ -4,11 +4,12 @@
   "description": "Hexgl game with node as server",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "install": "npm install",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BKcore/HexGL.git"
+    "url": "git@github.com:ChaitanyaKaranam/hexgl_node.git"
   },
   "keywords": [
     "HexGL"
