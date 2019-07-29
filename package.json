@@ -1,0 +1,25 @@
+{
+  "name": "hexgl_node",
+  "version": "1.0.0",
+  "description": "Hexgl game with node as server",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BKcore/HexGL.git"
+  },
+  "keywords": [
+    "HexGL"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BKcore/HexGL/issues"
+  },
+  "homepage": "https://github.com/BKcore/HexGL#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
