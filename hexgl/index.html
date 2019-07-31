@@ -43,7 +43,7 @@
   </head>
 
   <body>
-    <div id="step-1">
+    <div id="step-1" style="display: none">
       <div id="global"></div>
       <div id="title">
       </div>
@@ -65,8 +65,12 @@
       <div id="progressbar"></div>
     </div>
     <div id="step-4" style="display: none">
-      <div id="overlay"></div>
-      <div id="main"></div>
+      <div id="overlay">
+          <div id="list-container">
+          </div>
+      </div>
+      <div id="main">
+      </div>
     </div>
     <div id="step-5" style="display: none">
       <div id="time"></div>
@@ -124,6 +128,10 @@
     <script src="bkcore/hexgl/HexGL.js"></script>
 
     <script src="launch.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="components/App.js" type="text/babel"></script>
 
   </body>
 </html>

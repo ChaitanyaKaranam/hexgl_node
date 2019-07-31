@@ -262,3 +262,22 @@ html, body {
   color: #555;
   font-size: 1.2em;
 }
+
+.scorecard{
+  font-size: 20px;
+
+}
+
+.scorecard > ul{
+  list-style-type: none;
+
+}
+
+.scorecard > li{
+  font-size: 20px;
+
+}
+
+#list-container{
+  position: absolute;
+}

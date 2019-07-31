@@ -78,13 +78,13 @@ bkcore.hexgl.HexGL = function(opts)
 
 	this.initRenderer();
 
-	function onKeyPress(event)
-	{
-		if(event.keyCode == 27/*escape*/)
-		{
-			self.reset();
-		}
-	}
+	// function onKeyPress(event)
+	// {
+	// 	if(event.keyCode == 27/*escape*/)
+	// 	{
+	// 		self.reset();
+	// 	}
+	// }
 
 	this.document.addEventListener('keydown', onKeyPress, false);
 }
@@ -441,6 +441,6 @@ bkcore.hexgl.HexGL.prototype.tweakShipControls = function()
 		c.angularLerp = 0.4;
 	}
 
-	if(this.godmode)
-		c.shieldDamage = 0.0;
+	// if(this.godmode)
+	// 	// c.shieldDamage = 0.0;
 }

@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "install": "npm install",
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,10 @@
   },
   "homepage": "https://github.com/BKcore/HexGL#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "ws": "^7.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }

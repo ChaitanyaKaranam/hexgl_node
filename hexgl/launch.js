@@ -48,6 +48,9 @@
 
   s = [['controlType', ['KEYBOARD', 'TOUCH', 'LEAP MOTION CONTROLLER', 'GAMEPAD'], defaultControls, defaultControls, 'Controls: '], ['quality', ['LOW', 'MID', 'HIGH', 'VERY HIGH'], 3, 3, 'Quality: '], ['hud', ['OFF', 'ON'], 1, 1, 'HUD: '], ['godmode', ['OFF', 'ON'], 0, 1, 'Godmode: ']];
 
+
+  return init(s[0][3], s[1][3], s[2][3], s[3][3]);
+
   _fn = function(a) {
     var e, f, _ref;
     a[3] = (_ref = u(a[0])) != null ? _ref : a[2];
