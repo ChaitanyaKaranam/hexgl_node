@@ -86,7 +86,7 @@ bkcore.hexgl.HexGL = function(opts)
 	// 	}
 	// }
 
-	this.document.addEventListener('keydown', onKeyPress, false);
+	//this.document.addEventListener('keydown', onKeyPress, false);
 }
 
 bkcore.hexgl.HexGL.prototype.start = function()
@@ -170,7 +170,7 @@ bkcore.hexgl.HexGL.prototype.initGameplay = function()
 			self.displayScore(this.finishTime, this.lapTimes);
 		}
 	});
-
+	
 	this.gameplay.start();
 
 	bkcore.Audio.play('bg');
