@@ -20,13 +20,29 @@ wss.on("connection", function(ws){
     ws_connections.push(ws);
 
     // check if all the connections are in place and start the match
-    if(ws_connections.length === 2){
+    if(ws_connections.length === 1){
         setTimeout(() => {
             ws_connections.forEach(client => {
-                client.send('start');
+                client.send('START');
             })
-        }, 3000);
+        }, 2000);
+        setTimeout(() => {
+            ws_connections.forEach(client => {
+                client.send('FINISH');
+            })
+        }, 15000);
     }
+
+    // check if all the clients are connected
+    setInterval(() => {
+        ws_connections.forEach(client => {
+            if(client.readyState !== 1){
+                console.log('Deleting client connection')
+                delete ws_connections.splice(ws_connections.indexOf(client), 1);
+            }
+        })
+    }, 1000);
+
     
     ws.on('message', msg => {
         console.log(msg);

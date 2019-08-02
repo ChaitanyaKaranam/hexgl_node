@@ -31,10 +31,16 @@ import { socket } from './socket.js';
         console.log('LOADED.');
         socket.onmessage = (event) => {
           console.log(event);
-          hexGL.init();
-          $('step-3').style.display = 'none';
-          $('step-4').style.display = 'block';
-          return hexGL.start();
+          if(event.data === 'START'){
+            hexGL.init();
+            $('step-3').style.display = 'none';
+            $('step-4').style.display = 'block';
+            return hexGL.start();
+          }
+          if(event.data === 'FINISH'){
+              console.log(event.data);
+              return hexGL.forceFinish();
+          }
         }
       },
       onError: function(s) {

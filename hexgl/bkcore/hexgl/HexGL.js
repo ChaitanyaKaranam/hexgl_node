@@ -137,6 +137,10 @@ bkcore.hexgl.HexGL.prototype.update = function()
 	this.manager.renderCurrent();
 }
 
+bkcore.hexgl.HexGL.prototype.forceFinish = function(){
+	this.gameplay.forceFinish()
+}
+
 bkcore.hexgl.HexGL.prototype.init = function()
 {
 	this.initHUD();
