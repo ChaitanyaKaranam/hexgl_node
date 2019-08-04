@@ -1,35 +1,34 @@
 import React, { Component } from 'react';
+import { getLobbies, createLobby } from '../api';
 
 class AvailableLobby extends Component {
 
     constructor(props) {
         super(props);
-        this.setCookie('userName', 'krishna', 1);
         this.state = {
-            lobby: [
-                { name: 'The Racers den', maxPlayers: 12, playersJoined: 10},
-                { name: 'Fast and Furiousa', maxPlayers: 5, playersJoined: 5},
-                { name: 'SBS Gaming', maxPlayers: 10, playersJoined: 10},
-                { name: 'Ferrari Championship', maxPlayers: 2, playersJoined: 1},
-                { name: 'The Asian SpeedRacers', maxPlayers: 12, playersJoined: 11},
-                { name: 'Practice', maxPlayers: 1, playersJoined: 0},
-                { name: 'Cheetah Warriors', maxPlayers: 7, playersJoined: 3},
-            ],
+            lobby: [],
             view: 'available_view',
             lobby_name: '',
             player_count: 'default'
         }
     }
-    
-    setCookie(name,value,days) {
-        var expires = "";
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days*24*60*60*1000));
-            expires = "; expires=" + date.toUTCString();
-        }
-        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+
+    componentDidMount(){
+        this.refreshLobbies()
     }
+
+    refreshLobbies(){
+        console.log('called');
+        getLobbies()
+        .then(res => res.json())
+        .then(res => {
+            this.setState({ lobby: res })
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
+
     getCookie(name) {
         var nameEQ = name + "=";
         var ca = document.cookie.split(';');
@@ -41,15 +40,11 @@ class AvailableLobby extends Component {
         return null;
     }
 
-    componentDidMount(){
-        // Make ajax call
-    }
-
     renderView(){
         if(this.state.view === 'available_view'){
             return(
                 <>
-                    {this.state.lobby.length > 1 ?                
+                    {this.state.lobby.length > 0 ?                
                         <table className="lobbyTable">
                             <thead>
                                 <tr>
@@ -92,7 +87,23 @@ class AvailableLobby extends Component {
                         <option value="12">12</option>
                     </select>
                     <br/>
-                    <button>Create</button>
+                    <button onClick={() => {
+                        let payload = {
+                            lobby: {
+                                "name": this.state.lobby_name,
+                                "max_players": this.state.player_count
+                            },
+                            player: this.getCookie('userName')
+                        }
+                        console.log(payload);
+                        createLobby(payload).then(res =>{
+                            console.log(res)
+                            this.refreshLobbies()
+                            window.location.href = 'http://localhost:5000'
+                        });
+                        
+
+                    }}>Create</button>
                     <button onClick={() => { this.setState({ view: 'available_view'})}}>Back</button>
                 </>
             )
@@ -100,12 +111,12 @@ class AvailableLobby extends Component {
     }
 
     renderLobbies(){
-        return this.state.lobby.map(({ name, maxPlayers, playersJoined }) => {
+        return this.state.lobby.map((lobby) => {
             return(
                 <tr>
-                    <td><span className="lobbyname__lobby">{name}</span></td>
-                    <td><span className="lobbyname__lobby">{maxPlayers}</span></td>
-                    <td><span className="lobbyname__lobby">{playersJoined}</span></td>
+                    <td><span className="lobbyname__lobby">{lobby.name}</span></td>
+                    <td><span className="lobbyname__lobby">{lobby.max_players}</span></td>
+                    <td><span className="lobbyname__lobby">{Object.keys(lobby.players).length}</span></td>
                     <td>
                         <span className="lobbyJoin__lobby">
                             <button onClick={() => {

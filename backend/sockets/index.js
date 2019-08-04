@@ -15,7 +15,7 @@ class SocketManager{
         if(req.headers['cookie'] && req.headers['cookie'].includes('userName=')){
             let userName = req.headers['cookie'].split('userName=')[1];
             this.ws_connections[userName] = ws;
-            
+
             // if(!this.ws_connections[userName]){
             //     this.ws_connections[userName] = ws;
             // }else{
@@ -28,6 +28,12 @@ class SocketManager{
 
     getConnections(){
         return this.ws_connections;
+    }
+
+    getUserConnection(user){
+        if(this.ws_connections[user]){
+            return this.ws_connections[user]
+        }
     }
 
     // initializeConnection(){

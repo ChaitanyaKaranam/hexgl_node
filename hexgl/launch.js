@@ -29,14 +29,19 @@ import { socket } from './socket.js';
     return hexGL.load({
       onLoad: function() {
         console.log('LOADED.');
+
+          hexGL.init();
+          $('step-3').style.display = 'none';
+          $('step-4').style.display = 'block';
+          return hexGL.start();
         socket.onmessage = (event) => {
           console.log(event);
-          if(event.data === 'START'){
+          // if(event.data === 'START'){
             hexGL.init();
             $('step-3').style.display = 'none';
             $('step-4').style.display = 'block';
             return hexGL.start();
-          }
+          // }
           if(event.data === 'FINISH'){
               console.log(event.data);
               return hexGL.forceFinish();
