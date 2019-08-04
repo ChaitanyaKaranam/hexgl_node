@@ -12,6 +12,7 @@ background-color: #000428;
   color: white;
   font-size: 3rem;
   font-family: 'BebasNeueRegular';
+  height: 100%;
 }
 
 .hero_grid{
@@ -67,4 +68,41 @@ background-color: #000428;
   font-weight: normal;
   font-style: normal;
 
+}
+
+.lobbyView{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  height: 100%;
+}
+
+.heroProfile{
+  align-self: center;
+}
+
+.lobbyView > div > svg{
+  height: 500px;
+}
+
+.lobbyDetails{
+  /* grid-column-start: 2;
+  grid-column-end: 4; */
+  align-self: center;
+}
+
+.lobbyTable{
+  width: 100%;
+  border-spacing: 2rem;
+}
+
+.lobbyTable > thead > tr > th{
+  font-size: 1.5rem;
+}
+
+.lobbyTable > tbody > tr{
+  margin: 2rem;
+}
+
+.lobbyTable > tbody > tr > td{
+  font-size: 1.3rem;
 }

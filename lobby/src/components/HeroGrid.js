@@ -13,15 +13,42 @@ class HeroGrid extends Component {
     render() {
         return (
             <div className="hero_grid">  
-                <Hero1 height="400"/>
-                <Hero2 height="400"/>
-                <Hero3 height="400"/>
-                <Hero4 height="400"/>
-                <Hero5 height="400"/>
-                <Hero6 height="400"/>
-                <Hero7 height="400"/>
-                <Hero8 height="400"/>
-                <Hero9 height="400"/>
+                <Hero1 height="400" onClick={() => {
+                    this.props.setHero('hero1')
+                    this.props.setView('lobby_view')
+                }}/>
+                <Hero2 height="400" onClick={() => {
+                    this.props.setHero('hero2')
+                    this.props.setView('lobby_view')
+                }}/>
+                <Hero3 height="400" onClick={() => {
+                    this.props.setHero('hero3')
+                    this.props.setView('lobby_view')
+                }}/>
+                <Hero4 height="400" onClick={() => {
+                    this.props.setHero('hero4')
+                    this.props.setView('lobby_view')
+                }}/>
+                <Hero5 height="400" onClick={() => {
+                    this.props.setHero('hero5')
+                    this.props.setView('lobby_view')
+                }}/>
+                <Hero6 height="400" onClick={() => {
+                    this.props.setHero('hero6')
+                    this.props.setView('lobby_view')
+                }}/>
+                <Hero7 height="400" onClick={() => {
+                    this.props.setHero('hero7')
+                    this.props.setView('lobby_view')
+                }}/>
+                <Hero8 height="400" onClick={() => {
+                    this.props.setHero('hero8')
+                    this.props.setView('lobby_view')
+                }}/>
+                <Hero9 height="400" onClick={() => {
+                    this.props.setHero('hero9')
+                    this.props.setView('lobby_view')
+                }}/>
             </div>
         );
     }
