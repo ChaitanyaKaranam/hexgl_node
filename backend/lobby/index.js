@@ -34,13 +34,14 @@ class LobbyManager{
     }
 
     addPlayer(lobby_name, player){
-       
+        let added = false;
         this.getLobby().forEach(lobby => {
             if(lobby.name === lobby_name && lobby.players.indexOf(player) === -1){
                 lobby.players.push(player);
-                console.log(this.getLobby());
+                added = true;
             }
         })
+        return added;
     }
 
     removePlayer(lobby_name, player){
