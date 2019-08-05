@@ -4,7 +4,7 @@ class LobbyManager{
         this.lobbies = [{
             name: 'Practice',
             max_players: 1,
-            players: []
+            players: ['test']
         },
         {
             name: 'Practice',
@@ -50,6 +50,27 @@ class LobbyManager{
                 delete lobby[player];
             }
         })
+    }
+
+    searchPlayer(player){
+        let val = null;
+        this.getLobby().forEach(lobby => {
+            if(lobby.players.indexOf(player) !== -1){
+                console.log(lobby.name);
+                val = lobby.name;
+            }
+        })
+        return val;
+    }
+
+    lobbyDetails(lobby){
+        let val = null;
+        this.getLobby().forEach(result => {
+            if(result.name === lobby){
+                val = result
+            }
+        })
+        return val;
     }
 }
 

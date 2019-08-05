@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const app = express();
 const server = http.createServer(app);
 const SocketManager = require('./sockets');
-const LobbyManager = require('./lobby');
 const Lobby = require('./api/lobby_api');
 const cors = require('cors');
 
@@ -17,12 +16,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/', express.static(path.join(__dirname, '/../hexgl')));
 
 let socketManager = new SocketManager(server);
-// let lobbyManager = new LobbyManager(socketManager);
-
-
-// setInterval(() => {
-//     lobbyManager.getLobby();
-// }, 1000);
 
 server.listen(process.env.PORT || 5000 , () => console.log('server started'))
 

@@ -23,6 +23,32 @@ router.get('/join_lobby', (req, res) => {
     }
 })
 
+router.get('/search_player', (req, res) => {
+    if(req.query['player']){
+        let val = lobbyManager.searchPlayer(req.query.player);
+        if(val){
+            res.send(val);
+        }else{
+            res.status(500).send('Player not found')
+        }
+    }else{
+        res.status(500).send('Player not found')
+    }
+})
+
+router.get('/lobby_details', (req, res) => {
+    if(req.query['lobby']){
+        let val = lobbyManager.lobbyDetails(req.query['lobby']);
+        if(val){
+            res.send(val);
+        }else{
+            res.status(500).send('Lobby not found')
+        }
+    }else{
+        res.status(500).send('Lobby not found')
+    }
+})
+
 router.post('/create_lobby', (req, res) => {
     console.log(req.body);
     if(lobbyManager.createLobby(req.body['lobby'], req.body['player'])){
