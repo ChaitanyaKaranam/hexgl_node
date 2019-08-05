@@ -13,3 +13,7 @@ export const createLobby = (payload) => {
         }
     })
 }
+
+export const joinLobby = (lobby, player) => {
+    return fetch(`${BACKEND_URL}/api/lobby/join_lobby?lobby=${lobby}&player=${player}`)
+}

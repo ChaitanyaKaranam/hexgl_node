@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-let elem = document.getElementById('main-screen');
 
 class Login extends Component {
 

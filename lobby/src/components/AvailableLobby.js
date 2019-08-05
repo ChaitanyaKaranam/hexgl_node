@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getLobbies, createLobby } from '../api';
+import { getLobbies, createLobby, joinLobby } from '../api';
 
 class AvailableLobby extends Component {
 
@@ -34,8 +34,8 @@ class AvailableLobby extends Component {
         var ca = document.cookie.split(';');
         for(var i=0;i < ca.length;i++) {
             var c = ca[i];
-            while (c.charAt(0)==' ') c = c.substring(1,c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            while (c.charAt(0)===' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
         }
         return null;
     }
@@ -120,8 +120,14 @@ class AvailableLobby extends Component {
                     <td>
                         <span className="lobbyJoin__lobby">
                             <button onClick={() => {
-                                // Test
-                                const ws = new WebSocket('ws://localhost:5000');
+                                if(this.getCookie('userName')){
+                                    joinLobby(lobby.name, this.getCookie('userName'))
+                                        .then(res => {
+                                            console.log(res)
+                                            window.location.href = 'http://localhost:5000'
+                                        })
+                                        .catch(err => console.log(err))
+                                }
                             }}>Join</button>
                         </span>
                     </td>
