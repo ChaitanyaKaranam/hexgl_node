@@ -5,6 +5,8 @@
  *          To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/3.0/.
  */
 
+// import { socket } from './socket.js';
+
 var bkcore = bkcore || {};
 bkcore.hexgl = bkcore.hexgl || {};
 
@@ -101,6 +103,13 @@ bkcore.hexgl.Gameplay = function(opts)
 			self.end(self.result.REPLAY);
 		}
 	};
+
+	// socket.onmessage = (event) => {
+	// 	if(event === 'FINISH'){
+	// 		self.end(1)
+	// 	}
+	//   }
+
 }
 
 bkcore.hexgl.Gameplay.prototype.simu = function()
@@ -111,6 +120,10 @@ bkcore.hexgl.Gameplay.prototype.simu = function()
 	this.step = 100;
 	this.result = this.results.FINISH;
 	this.shipControls.active = false;
+}
+
+bkcore.hexgl.Gameplay.prototype.forceFinish = function(){
+	this.end(1)
 }
 
 bkcore.hexgl.Gameplay.prototype.start = function(opts)

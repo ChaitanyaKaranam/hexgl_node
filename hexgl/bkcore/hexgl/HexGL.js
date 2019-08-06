@@ -78,15 +78,15 @@ bkcore.hexgl.HexGL = function(opts)
 
 	this.initRenderer();
 
-	function onKeyPress(event)
-	{
-		if(event.keyCode == 27/*escape*/)
-		{
-			self.reset();
-		}
-	}
+	// function onKeyPress(event)
+	// {
+	// 	if(event.keyCode == 27/*escape*/)
+	// 	{
+	// 		self.reset();
+	// 	}
+	// }
 
-	this.document.addEventListener('keydown', onKeyPress, false);
+	//this.document.addEventListener('keydown', onKeyPress, false);
 }
 
 bkcore.hexgl.HexGL.prototype.start = function()
@@ -137,6 +137,10 @@ bkcore.hexgl.HexGL.prototype.update = function()
 	this.manager.renderCurrent();
 }
 
+bkcore.hexgl.HexGL.prototype.forceFinish = function(){
+	this.gameplay.forceFinish()
+}
+
 bkcore.hexgl.HexGL.prototype.init = function()
 {
 	this.initHUD();
@@ -170,7 +174,7 @@ bkcore.hexgl.HexGL.prototype.initGameplay = function()
 			self.displayScore(this.finishTime, this.lapTimes);
 		}
 	});
-
+	
 	this.gameplay.start();
 
 	bkcore.Audio.play('bg');
@@ -441,6 +445,6 @@ bkcore.hexgl.HexGL.prototype.tweakShipControls = function()
 		c.angularLerp = 0.4;
 	}
 
-	if(this.godmode)
-		c.shieldDamage = 0.0;
+	// if(this.godmode)
+	// 	// c.shieldDamage = 0.0;
 }

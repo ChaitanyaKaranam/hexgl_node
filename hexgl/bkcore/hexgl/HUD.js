@@ -8,6 +8,11 @@
 var bkcore = bkcore || {};
 bkcore.hexgl = bkcore.hexgl || {};
 
+let count = 0;
+let avgSpeed = 0;
+let _time = 0;
+let _distance = 0;
+
 bkcore.hexgl.HUD = function(opts)
 {
 	var self = this;
@@ -112,6 +117,7 @@ bkcore.hexgl.HUD.prototype.resetLap = function()
 bkcore.hexgl.HUD.prototype.updateTime = function(time)
 {
 	this.time = this.timeSeparators[0] + time.m + this.timeSeparators[1] + time.s + this.timeSeparators[2] + time.ms + this.timeSeparators[3];
+	_time = time.m * 60 + time.s + time.ms / 1000;
 }
 
 bkcore.hexgl.HUD.prototype.resetTime = function()
@@ -121,6 +127,10 @@ bkcore.hexgl.HUD.prototype.resetTime = function()
 
 bkcore.hexgl.HUD.prototype.update = function(speed, speedRatio, shield, shieldRatio)
 {
+
+	_distance = ((speed * _time)/1000) + _distance
+	console.log((_distance/1000).toFixed(2));
+
 	var SCREEN_WIDTH = this.width;
 	var SCREEN_HEIGHT = this.height;
 

@@ -1,0 +1,108 @@
+body{
+background-color: #000428;
+}
+
+::-webkit-scrollbar { 
+  display: none; 
+}
+
+.App{
+  margin-top: 3rem;
+  text-align: center;
+  color: white;
+  font-size: 3rem;
+  font-family: 'BebasNeueRegular';
+  height: 100%;
+}
+
+.hero_grid{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 3rem;
+  padding-top: 0rem;
+  justify-content: center;
+  
+}
+
+.hero_grid > svg{
+  margin: 2rem;
+  justify-self: center;
+  background: #C04848;  /* fallback for old browsers */
+  background: radial-gradient(#185a9d, #43cea2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: 1rem solid transparent;
+}
+
+.hero_grid > svg:last-child{
+  align-content: center;
+}
+
+.hero_grid > svg:hover{
+  cursor: pointer;
+  border: 1rem solid white;
+}
+
+.hero_grid > .center_svg{
+  grid-column: 1;
+}
+
+@media (max-width: 1200px){
+  .hero_grid{
+    grid-template-columns: auto auto;
+  }
+}
+
+
+@media (max-width: 800px){
+  .hero_grid{
+    grid-template-columns: auto;
+  }
+}
+
+@font-face {
+  font-family: 'BebasNeueRegular';
+  src: url('./css/BebasNeue-webfont.eot');
+  src: url('./css/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+       url('./css/BebasNeue-webfont.woff') format('woff'),
+       url('./css/BebasNeue-webfont.ttf') format('truetype'),
+       url('./css/BebasNeue-webfont.svg#BebasNeueRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+.lobbyView{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  height: 100%;
+}
+
+.heroProfile{
+  align-self: center;
+}
+
+.lobbyView > div > svg{
+  height: 500px;
+}
+
+.lobbyDetails{
+  /* grid-column-start: 2;
+  grid-column-end: 4; */
+  align-self: center;
+}
+
+.lobbyTable{
+  width: 100%;
+  border-spacing: 2rem;
+}
+
+.lobbyTable > thead > tr > th{
+  font-size: 1.5rem;
+}
+
+.lobbyTable > tbody > tr{
+  margin: 2rem;
+}
+
+.lobbyTable > tbody > tr > td{
+  font-size: 1.3rem;
+}
