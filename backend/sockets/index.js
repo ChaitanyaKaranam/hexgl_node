@@ -2,12 +2,25 @@ const WebSocketServer = require("ws").Server;
 
 class SocketManager{
 
-    constructor(server) {
+    constructor(server, gameManager, lobbyManager) {
         this.ws_connections = {};
         this.lobbies = [];
         this.wss = new WebSocketServer({ server });
+        this.lobbyManager = lobbyManager;
+        this.gameManager = gameManager;
         this.wss.on('connection', (ws, req) => {
+            console.log(ws);
             this.createConnection(ws, req);
+            ws.on('message', (val) => {
+                try{
+                    let payload = JSON.parse(val);
+                    if(payload.event){
+                        this.eventManager(payload);
+                    }
+                }catch(e){
+                    console.log(e)
+                }
+            })
         })     
     }
 
@@ -15,14 +28,6 @@ class SocketManager{
         if(req.headers['cookie'] && req.headers['cookie'].includes('userName=')){
             let userName = req.headers['cookie'].split('userName=')[1];
             this.ws_connections[userName] = ws;
-
-            // if(!this.ws_connections[userName]){
-            //     this.ws_connections[userName] = ws;
-            // }else{
-            //     if(ws.readyState === 1){
-            //         ws.send('UserName Exists');
-            //     }
-            // }
         }
     }
 
@@ -33,6 +38,20 @@ class SocketManager{
     getUserConnection(user){
         if(this.ws_connections[user]){
             return this.ws_connections[user]
+        }
+    }
+
+    async eventManager(payload){
+        console.log('Event manager triggered');
+        switch(payload.event){
+            case 'JOIN_GAME':
+                let game = await this.gameManager.joinGame(payload.lobby_name, { name: payload.userName, ws: this.getUserConnection(payload.userName)});
+                if(game){
+                    console.log(game);
+                }
+                break;
+            default:
+                console.log('Invalid Event');
         }
     }
 

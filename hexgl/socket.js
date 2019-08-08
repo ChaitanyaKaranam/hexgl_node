@@ -4,4 +4,6 @@ console.log(socket);
 
 socket.onopen = () => {console.log('connected')}
 
+window.socket = socket;
+
 export { socket }

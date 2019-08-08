@@ -1,6 +1,5 @@
 class LobbyManager{
-    constructor(socketManager){
-        this.socketManager = socketManager;
+    constructor(){
         this.lobbies = [{
             name: 'Practice',
             max_players: 1,

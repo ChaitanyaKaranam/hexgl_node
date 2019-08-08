@@ -30,15 +30,15 @@ import { socket } from './socket.js';
       onLoad: function() {
         console.log('LOADED.');
 
-          hexGL.init();
+          // hexGL.init();
           $('step-3').style.display = 'none';
-          $('step-4').style.display = 'block';
-          return hexGL.start();
+          $('step-3.5').style.display = 'block';
+          // return hexGL.start();
         socket.onmessage = (event) => {
           console.log(event);
           // if(event.data === 'START'){
             hexGL.init();
-            $('step-3').style.display = 'none';
+            $('step-3.5').style.display = 'none';
             $('step-4').style.display = 'block';
             return hexGL.start();
           // }

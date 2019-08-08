@@ -29,6 +29,16 @@ class AvailableLobby extends Component {
         })
     }
 
+    setCookie(name,value,days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    }
+
     getCookie(name) {
         var nameEQ = name + "=";
         var ca = document.cookie.split(';');
@@ -99,6 +109,7 @@ class AvailableLobby extends Component {
                         createLobby(payload).then(res =>{
                             console.log(res)
                             this.refreshLobbies()
+                            this.setCookie('lobby_name', payload.lobby.name, 1)
                             window.location.href = 'http://localhost:5000'
                         });
                         
@@ -124,6 +135,7 @@ class AvailableLobby extends Component {
                                     joinLobby(lobby.name, this.getCookie('userName'))
                                         .then(res => {
                                             console.log(res)
+                                            this.setCookie('lobby_name', lobby.name, 1)
                                             window.location.href = 'http://localhost:5000'
                                         })
                                         .catch(err => console.log(err))
