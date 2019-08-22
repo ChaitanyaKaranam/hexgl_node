@@ -36,12 +36,12 @@ import { socket } from './socket.js';
           // return hexGL.start();
         socket.onmessage = (event) => {
           console.log(event);
-          // if(event.data === 'START'){
+          if(event.data === 'START_GAME'){
             hexGL.init();
             $('step-3.5').style.display = 'none';
             $('step-4').style.display = 'block';
             return hexGL.start();
-          // }
+          }
           if(event.data === 'FINISH'){
               console.log(event.data);
               return hexGL.forceFinish();

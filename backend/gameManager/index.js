@@ -33,20 +33,18 @@ class GameManager{
                     stats: null
             }
         });
-        debugger;
-        console.log(players);
-        console.log(this.game[lobby]);
         this.joinGame(lobby, player);
     }
 
     checkGameStart(lobby){
         console.log("checking game start");
         let lobby_join_count = Object.keys(this.game[lobby]['players']).length;
-        let lobby_player_count = this.lobbyManager.lobbyDetails(lobby).players.length;
-        console.log(lobby_join_count, lobby_player_count);
+        let lobby_player_count = parseInt(this.lobbyManager.lobbyDetails(lobby).max_players);
         if(lobby_join_count === lobby_player_count){
             if(this.checkConnectionStatus(this.game[lobby]['players'])){
+                console.log('triggering game status change');
                 this.setGameStatus(lobby, GameManagerStatus.RUNNING)
+                this.startGame(lobby);
                 return this.game[lobby]['players'];
             }else{
                 return null;
@@ -59,9 +57,8 @@ class GameManager{
     checkConnectionStatus(players){
         console.log('Checkin connection stats');
         let ready = true;
-        console.log(players);
         Object.keys(players).forEach(player => {
-            if(!player['connected']){
+            if(!players[player]['connected']){
                 ready = false;
             }
         })
@@ -69,7 +66,18 @@ class GameManager{
     }
 
     setGameStatus(lobby, status){
+        console.log('Setting game status');
         this.game[lobby]['status'] = status;
+    }
+
+    startGame(game){
+        if(this.game[game]['status'] === GameManagerStatus.RUNNING){
+            let players = this.game[game]['players'];
+            Object.keys(players).forEach(player => {
+                let ws = players[player]['ws'];
+                ws.send('START_GAME');
+            })
+        }
     }
     
     getGameDetails(){

@@ -26,8 +26,12 @@ class SocketManager{
 
     createConnection(ws, req){
         if(req.headers['cookie'] && req.headers['cookie'].includes('userName=')){
-            let userName = req.headers['cookie'].split('userName=')[1];
-            this.ws_connections[userName] = ws;
+            req.headers['cookie'].split(';').forEach(val => {
+                if(val.includes('userName=')){
+                    let userName =val.split('userName=')[1];
+                    this.ws_connections[userName] = ws;
+                }
+            })
         }
     }
 
@@ -45,6 +49,10 @@ class SocketManager{
         console.log('Event manager triggered');
         switch(payload.event){
             case 'JOIN_GAME':
+                console.log("fetching socket details");
+                console.log(Object.keys(this.getConnections()));
+
+                console.log(this.getUserConnection(payload.userName));
                 let game = await this.gameManager.joinGame(payload.lobby_name, { name: payload.userName, ws: this.getUserConnection(payload.userName)});
                 if(game){
                     console.log(game);
