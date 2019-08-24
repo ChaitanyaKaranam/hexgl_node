@@ -12,7 +12,8 @@ class GameManager{
             this.game[lobby]['players'][player.name] = {
                 connected: true,
                 ws: player.ws,
-                stats: null
+                stats: null,
+                ready: false
             }
             this.checkGameStart(lobby);
         }else{
@@ -30,7 +31,8 @@ class GameManager{
             this.game[lobby]['players'][player_name] = {
                     connected: false,
                     ws: null,
-                    stats: null
+                    stats: null,
+                    ready: false
             }
         });
         this.joinGame(lobby, player);
@@ -41,10 +43,12 @@ class GameManager{
         let lobby_join_count = Object.keys(this.game[lobby]['players']).length;
         let lobby_player_count = parseInt(this.lobbyManager.lobbyDetails(lobby).max_players);
         if(lobby_join_count === lobby_player_count){
-            if(this.checkConnectionStatus(this.game[lobby]['players'])){
+            if(this.checkConnectionStatus(this.game[lobby]['players'] && this.checkReadyStatus(this.game[lobby]['players']))){
                 console.log('triggering game status change');
                 this.setGameStatus(lobby, GameManagerStatus.RUNNING)
-                this.startGame(lobby);
+                setTimeout(() => {
+                    this.startGame(lobby);
+                }, 5000);
                 return this.game[lobby]['players'];
             }else{
                 return null;
@@ -65,17 +69,34 @@ class GameManager{
         return ready;
     }
 
+    checkReadyStatus(players){
+        console.log('Checkin ready stats');
+        let ready = true;
+        Object.keys(players).forEach(player => {
+            if(!players[player]['ready']){
+                ready = false;
+            }
+        })
+        return ready;
+    }
+
     setGameStatus(lobby, status){
         console.log('Setting game status');
         this.game[lobby]['status'] = status;
+    }
+
+    setReadyStatus(player, lobby){
+        this.game[lobby]['players'][player]['ready'] = true;
     }
 
     startGame(game){
         if(this.game[game]['status'] === GameManagerStatus.RUNNING){
             let players = this.game[game]['players'];
             Object.keys(players).forEach(player => {
+                console.log(player);
                 let ws = players[player]['ws'];
                 ws.send('START_GAME');
+                ws.send(player);
             })
         }
     }

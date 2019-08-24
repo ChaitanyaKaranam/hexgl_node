@@ -9,7 +9,7 @@ class SocketManager{
         this.lobbyManager = lobbyManager;
         this.gameManager = gameManager;
         this.wss.on('connection', (ws, req) => {
-            console.log(ws);
+            console.log('creating new connection');
             this.createConnection(ws, req);
             ws.on('message', (val) => {
                 try{
@@ -58,6 +58,10 @@ class SocketManager{
                     console.log(game);
                 }
                 break;
+
+            case 'PLAYER_READY':
+                console.log('Player ready');
+                this.gameManager.setReadyStatus(payload.userName, payload.lobby_name)
             default:
                 console.log('Invalid Event');
         }

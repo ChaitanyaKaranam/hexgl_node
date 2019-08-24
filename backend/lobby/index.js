@@ -2,12 +2,7 @@ class LobbyManager{
     constructor(){
         this.lobbies = [{
             name: 'Practice',
-            max_players: 1,
-            players: ['test']
-        },
-        {
-            name: 'Practice',
-            max_players: 1,
+            max_players: 2,
             players: []
         }];
     }
